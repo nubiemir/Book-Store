@@ -1,0 +1,168 @@
+<%- include('./layouts/header.ejs') %>
+<div class="cart--header">
+  <h1>
+    Cart: <%= totalItems > 1 ? `${totalItems} items`: `${totalItems} item` %>
+  </h1>
+</div>
+<div class="cart">
+  <div class="cart--list">
+    <table>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th></th>
+      </tr>
+      <% if(cartItems.length > 0) {%> <% cartItems.forEach(item=>{ %>
+
+      <tr class="cart--items--row">
+        <td>
+          <div class="book--image">
+            <img src="/images/book-1.png" alt="book images" />
+            <div>
+              <span><%=item.product.title%></span
+              ><span><%=item.format.format%></span
+              ><span><%=item.bookAuthor.name%></span>
+            </div>
+          </div>
+        </td>
+        <td><%=item.product.price%> AED</td>
+        <td>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 0.3rem;
+              vertical-align: center;
+            "
+          >
+            <% if(item.qty >1) {%>
+            <form action="/cart/remove-item-cart" method="post">
+              <input
+                type="hidden"
+                name="productId"
+                value="<%=item.product._id%>"
+              />
+              <button type="submit"><i class="fa-solid fa-minus"></i></button>
+            </form>
+            <%}%>
+            <input type="text" name="quantity" value="<%=item.qty%>" disabled />
+            <form action="/cart/add-item-cart" method="post">
+              <input
+                type="hidden"
+                name="productId"
+                value="<%=item.product._id%>"
+              />
+              <button type="submit"><i class="fa-solid fa-plus"></i></button>
+            </form>
+          </div>
+        </td>
+        <td><%=item.subtotal%> AED</td>
+        <td>
+          <form action="/cart/delete-cart-item" method="POST">
+            <input
+              type="hidden"
+              name="productId"
+              value="<%=item.product._id%>"
+            />
+            <button type="submit"><i class="fa-solid fa-trash-can"></i></button>
+          </form>
+        </td>
+      </tr>
+
+      <% }) %> <%} else { %>
+      <tr class="cart--items--row">
+        <td colspan="5">
+          <h2 style="text-align: center">No Items in your cart!! 🙁</h2>
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
+
+  <div class="subtotal">
+    <div>
+      <h2>Cart Total</h2>
+      <table>
+        <tr>
+          <td>Sub total</td>
+          <td>
+            <%= totalItems > 0 ? `${checkOutPrice.totalWithOutVAT} AED`: `${0}
+            AED` %>
+          </td>
+        </tr>
+        <tr>
+          <td>VAT</td>
+          <td>
+            <%= totalItems > 0 ? `${checkOutPrice.VAT} AED`: `${0} AED` %>
+          </td>
+        </tr>
+        <tr>
+          <td>Shipping</td>
+          <td>
+            <%= totalItems > 0 ? `${checkOutPrice.shippingRate} AED`: `${0} AED`
+            %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h2>Shipping</h2>
+      <table>
+        <tr>
+          <td>shipping rate</td>
+          <td>
+            <%= totalItems > 0 ? `${checkOutPrice.shippingRate} AED`: `${0} AED`
+            %>
+          </td>
+        </tr>
+        <tr>
+          <td>Shipping to</td>
+          <td><%= totalItems > 0 ? `Abu Dhabi`: `-` %></td>
+        </tr>
+        <tr>
+          <td>
+            <a href="/cart/change-shipping-address">change shipping address</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <%if(totalItems > 0) {%> <%}%>
+    <div>
+      <table>
+        <tr>
+          <td><h2>Total</h2></td>
+          <td>
+            <%= totalItems > 0 ? `${checkOutPrice.totalWithVATShipping} AED`:
+            `${0} AED` %>
+          </td>
+        </tr>
+        <%if(totalItems > 0) {%>
+        <tr
+          class="coupon"
+          style="
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          <td colspan="2">
+            <form action="/fab/create-checkout-session" method="post">
+              <input
+                type="hidden"
+                name="totalCost"
+                value="<%=checkOutPrice.totalWithVATShipping%>"
+              />
+              <button type="submit">Check Out</button>
+            </form>
+          </td>
+        </tr>
+        <%}%>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include("./layouts/footer.ejs") %>

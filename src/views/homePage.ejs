@@ -1,0 +1,87 @@
+<%- include('./layouts/header.ejs') %>
+<div class="products">
+  <div class="product--filter">
+    <div class="product--categories">
+      <div class="categories--header">
+        <h1>Categories</h1>
+        <i class="fa-solid fa-minus collapse"></i>
+      </div>
+      <div class="categories--list">
+        <ul>
+          <li><a href="/fab/shop">All</a></li>
+          <% categories.forEach(cat=> { %>
+          <li>
+            <a href="/fab/shop?category=<%=cat.id%>"><%=cat.category%></a>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+    <div class="product--authors">
+      <div class="authors--header">
+        <h1>Authors</h1>
+        <i class="fa-solid fa-minus collapse"></i>
+      </div>
+      <div class="authors--list">
+        <ul>
+          <li><a href="/fab/shop">All</a></li>
+          <% authors.forEach(author=> { %>
+          <li>
+            <a href="/fab/shop?author=<%=author.id%>"><%=author.name%></a>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="prod--det">
+    <% if(!books.length){%>
+    <div>
+      <h1>Sorry no books found</h1>
+    </div>
+    <% } else {%> <% books.forEach(book=>{%>
+    <div class="product">
+      <img src="/images/book-1.png" alt="book image" />
+      <div class="product--info">
+        <div class="product--info--1">
+          <p><%=book.format.join(", ")%></p>
+          <p
+            style="
+              font-size: 1.2rem;
+              font-family: 'Tiro Bangla', serif;
+              font-size: 1rem;
+            "
+          >
+            <strong
+              ><%= (book.title.length < 20)? book.title :
+              book.title.slice(0,20).concat("...")%></strong
+            >
+          </p>
+          <p><%=book.author%></p>
+          <p style="font-size: 1.2rem; font-weight: 600"><%=book.price%> AED</p>
+        </div>
+        <div class="product--btn">
+          <form action="/fab/product/<%=book._id%>" method="GET">
+            <button type="submit" class="prod--btn">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </form>
+          <form action="/fab/wish-list" method="POST">
+            <input type="hidden" value="<%=book._id%>" name="pid" />
+            <button type="submit" class="prod--btn">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+          </form>
+          <form action="/cart/add-to-cart" method="POST">
+            <input type="hidden" value="<%=book._id%>" name="productId" />
+            <button type="submit" class="prod--btn">
+              <i class="fa-brands fa-opencart"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <% }) %> <%}%>
+  </div>
+</div>
+<%- include("./layouts/footer.ejs") %>

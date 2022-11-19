@@ -1,0 +1,75 @@
+<%- include('./layouts/header.ejs') %>
+<div class="orders">
+  <div class="orders--status">
+    <h3>Status</h3>
+    <div class="status--container">
+      <ul>
+        <li>
+          <a href="/fab/orders?status=all"
+            ><i class="fa-solid fa-layer-group"></i>All</a
+          >
+        </li>
+        <li>
+          <a href="/fab/orders?status=pending"
+            ><i class="fa-solid fa-spinner"></i> Pending</a
+          >
+        </li>
+        <li>
+          <a href="/fab/orders?status=confirmed"
+            ><i class="fa-solid fa-check-double"></i> confirmed</a
+          >
+        </li>
+        <li>
+          <a href="/fab/orders?status=shipped"
+            ><i class="fa-solid fa-truck-fast"></i>Shipped</a
+          >
+        </li>
+        <li>
+          <a href="/fab/orders?status=delivered"
+            ><i class="fa-solid fa-box-open"></i> Delivered</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="order--details">
+    <%if(order.length > 0) {%> <% order.forEach(or=>{%>
+    <div class="details--intro">
+      <div class="date detail">
+        <p><span>Date: </span> <%=or.date%></p>
+      </div>
+      <div class="name detail">
+        <p><span>Name: </span> <%=or.uname%></p>
+      </div>
+      <div class="order--id detail">
+        <p><span>Order Id: </span> <%=or.uid%></p>
+      </div>
+    </div>
+    <ul class="order--table">
+      <div>
+        <% or.orderList.forEach(o=>{ %>
+        <li>
+          <img src="/images/book-1.png" alt="book image" />
+          <div class="order--price--qty--container">
+            <p><%=o.title%></p>
+            <p>
+              <span>Format: </span><%=o.productDetails.bookFormt.join(", ")%>
+            </p>
+            <div class="order--price--qty">
+              <h5><%=o.price%></h5>
+              <h5>X<%=o.qty%></h5>
+            </div>
+          </div>
+        </li>
+        <% }) %>
+      </div>
+      <div class="order--total--price">
+        <h4><span>Total: </span><%=or.totalCost%> AED</h4>
+      </div>
+    </ul>
+    <% }) %> <% }else{ %>
+    <h1 class="no--order">Sorry No Orders Found 🙁</h1>
+    <% } %>
+  </div>
+</div>
+<%- include("./layouts/footer.ejs") %>

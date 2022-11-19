@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/logger.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>FAB | Signup</title>
+</head>
+<body>
+    <form action="/fab/signup" method="POST">
+        <h2>Sign up</h2>
+        <div class="uname">
+            <div>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <input type="text" name="uname" placeholder="Enter your user name">
+        </div>
+        <div class="email">
+            <div>
+                <i class="fa-solid fa-at"></i>
+            </div>
+            <input type="text" name="email" placeholder="Enter your user email">
+        </div>
+        <div class="password">
+            <div>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <input type="password" name="password" placeholder="Enter your password">
+        </div>
+        <div class="cpassword">
+            <div>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <input type="password" name="cpassword" placeholder="Confirm your password">
+        </div>
+        <div class="logger--btn">
+            <button type="submit">Signup</button>
+            <p>already have an account? <a href="/fab/signin">signin</a></p>
+        </div>
+    </form>
+</body>
+</html>

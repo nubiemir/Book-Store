@@ -1,0 +1,32 @@
+<%- include('./layouts/header.ejs') %>
+
+<div class="wishList">
+    <%if(wishList.length > 0){%>
+        <% wishList.forEach(item=> { %>
+            <div class="wishList--product">
+                <img src="/images/book-1.png" alt="book picture">
+                <div>
+                    <h1><%=item.title%></h1>
+                    <p><strong>by (author)</strong>  <%=item.productDetails.BookAuthor%></p>
+                    <h3><%=item.price%> AED</h3>
+                    <p><%=item.description%></p>
+                    <form action="/cart/add-to-cart" method="POST" class="add--to--cart--form">
+                        <input type="hidden" name="productId" value="<%=item._id%>">
+                        <button type="submit">Add to cart</button>
+                    </form>
+                    <form action="/fab/remove-wish-list" method="POST" class="remove--to--wish--form">
+                        <input type="hidden" name="pid" value="<%=item._id%>">
+                        <button type="submit"><i class="fa-solid fa-heart-circle-xmark"></i></button>
+                        <p>remove from wish list</p>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+
+            <h1>Sorry no items in your wish list 🙁</h1>
+
+    <%  } %>
+
+</div>
+<%- include("./layouts/footer.ejs") %>

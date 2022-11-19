@@ -1,0 +1,78 @@
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(
+      to top,
+      rgb(250, 145, 103),
+      rgba(236, 176, 153, 0.733)
+    )
+    no-repeat center;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  background: rgba(255, 255, 255, 0.322);
+  padding: 2rem;
+  width: 35%;
+  min-height: 65%;
+  border-radius: 20px;
+  box-shadow: 3px 3px 15px rgba(255, 255, 255, 0.322),
+    3px 3px 6px rgba(255, 255, 255, 0.158);
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.uname,
+.password,
+.email,
+.cpassword {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.uname input,
+.password input,
+.email input,
+.cpassword input {
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 12px;
+}
+
+.uname i,
+.password i,
+.email i,
+.cpassword i {
+  font-size: 1.5rem;
+}
+
+form button {
+  width: max-content;
+  padding: 0.7rem 3rem;
+  background: rgb(146, 42, 0);
+  border: none;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logger--btn {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  align-items: center;
+}

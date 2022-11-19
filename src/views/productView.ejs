@@ -1,0 +1,44 @@
+<%- include('./layouts/header.ejs') %>
+<div class="product--detail">
+  <div class="single--product">
+    <img src="/images/book-1.png" alt="book picture" />
+    <div>
+      <h1><%=title%></h1>
+      <p><strong>by (author)</strong> <%=productDetails.BookAuthor.name%></p>
+      <h3><%=price%> AED</h3>
+      <p><%=description%></p>
+      <form
+        action="/cart/add-to-cart"
+        method="POST"
+        class="add--to--cart--form"
+      >
+        <input type="hidden" name="productId" value="<%=_id%>" />
+        <input type="number" name="qty" value="1" />
+        <button type="submit">Add to cart</button>
+      </form>
+      <form action="/fab/wish-list" method="POST" class="add--to--wish--form">
+        <input type="hidden" name="pid" value="<%=_id%>" />
+        <button type="submit">
+          <i class="fa-solid fa-heart-circle-plus"></i>
+        </button>
+        <p>add to wish list</p>
+      </form>
+      <form action="/fab/share" method="POST" class="share--form">
+        <button type="submit"><i class="fa-solid fa-share-nodes"></i></button>
+        <p>Share</p>
+      </form>
+    </div>
+  </div>
+  <hr />
+  <div class="single--product--details">
+    <h3>Product Details</h3>
+    <div>
+      <p><strong>ISBN:</strong> <%=productDetails.ISPN%></p>
+      <p><strong>Author:</strong> <%=productDetails.BookAuthor.name%></p>
+      <p><strong>Category:</strong> <%=Categories%></p>
+      <p><strong>Pages:</strong> <%=productDetails.pages%> p</p>
+      <p><strong>Book Format:</strong> <%=format%></p>
+    </div>
+  </div>
+</div>
+<%- include("./layouts/footer.ejs") %>
