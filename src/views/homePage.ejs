@@ -8,10 +8,10 @@
       </div>
       <div class="categories--list">
         <ul>
-          <li><a href="/fab/shop">All</a></li>
+          <li><a href="/fab/">All</a></li>
           <% categories.forEach(cat=> { %>
           <li>
-            <a href="/fab/shop?category=<%=cat.id%>"><%=cat.category%></a>
+            <a href="/fab/?category=<%=cat.id%>"><%=cat.category%></a>
           </li>
           <% }) %>
         </ul>
@@ -24,10 +24,10 @@
       </div>
       <div class="authors--list">
         <ul>
-          <li><a href="/fab/shop">All</a></li>
+          <li><a href="/fab/">All</a></li>
           <% authors.forEach(author=> { %>
           <li>
-            <a href="/fab/shop?author=<%=author.id%>"><%=author.name%></a>
+            <a href="/fab/?author=<%=author.id%>"><%=author.name%></a>
           </li>
           <% }) %>
         </ul>
